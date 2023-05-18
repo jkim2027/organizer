@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template
+from flask import render_template, session
 import calendar
 import locale
 from datetime import datetime, timedelta
@@ -17,7 +17,9 @@ def my_calendar():
     cal = calendar.monthcalendar(year, month)
     print("cal", cal)
 
-    all_events = event.Event.all_events()
+    data = {'id': session['user_id']}
+    # all_events = event.Event.all_events()
+    all_events = event.Event.all_events_with_user(data)
     events = []
     for one_event in all_events:
         event_dict = {
@@ -28,7 +30,8 @@ def my_calendar():
         }
         events.append(event_dict)
 
-    all_tasks = task.Task.all_tasks()
+    # all_tasks = task.Task.all_tasks()
+    all_tasks = task.Task.all_tasks_with_user(data)
     tasks = []
     for one_task in all_tasks:
         task_dict = {

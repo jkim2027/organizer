@@ -4,7 +4,9 @@ from flask_app.models import task, category
 
 @app.route("/new-task")
 def new_task():
-    all_categories = category.Category.all_categories()
+    # all_categories = category.Category.all_categories()
+    data = {'id': session['user_id']}
+    all_categories = category.Category.all_categories_with_user(data)
     return render_template("create/create_task.html", all_categories=all_categories)
 
 @app.route("/new-task", methods = ['POST'])
@@ -41,8 +43,10 @@ def delete_task(task_id):
 
 @app.route("/edit/task/<int:task_id>")
 def edit_task(task_id):
+    data = {'id': session['user_id']}
     one_task = task.Task.show_one_task(task_id)
-    all_categories = category.Category.all_categories()
+    # all_categories = category.Category.all_categories()
+    all_categories = category.Category.all_categories_with_user(data)
     return render_template("edit/edit_task.html", one_task=one_task, all_categories=all_categories)
 
 @app.route("/edit/task/<int:task_id>", methods = ['POST'])

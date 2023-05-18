@@ -4,7 +4,9 @@ from flask_app.models import event, category
 
 @app.route("/new-event")
 def new_event():
-    all_categories = category.Category.all_categories()
+    # all_categories = category.Category.all_categories()
+    data = {'id': session['user_id']}
+    all_categories = category.Category.all_categories_with_user(data)
     return render_template("create/create_event.html", all_categories=all_categories)
 
 @app.route("/new-event", methods = ['POST'])
@@ -41,7 +43,9 @@ def delete_event(event_id):
 @app.route("/edit/event/<int:event_id>")
 def edit_event(event_id):
     one_event = event.Event.show_one_event(event_id)
-    all_categories = category.Category.all_categories()
+    data = {'id': session['user_id']}
+    all_categories = category.Category.all_categories_with_user(data)
+    # all_categories = category.Category.all_categories()
     return render_template("edit/edit_event.html", one_event=one_event, all_categories=all_categories)
 
 @app.route("/edit/event/<int:event_id>", methods = ['POST'])

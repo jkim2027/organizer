@@ -90,7 +90,7 @@ const checkButtons = document.querySelectorAll('#todo-list a#check-btn');
 checkButtons.forEach(button => {
     button.addEventListener('click', e => {
         const li = e.target.closest('li');
-        li.classList.add('completed');
+        li.classList.toggle('completed');
     });
 });
 

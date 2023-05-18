@@ -254,8 +254,11 @@ input[type="radio"] {
 
 .slide {
     transform: translateX(10rem);
-    transition: all 1s ease;
     opacity: 0;
+}
+
+#todo-list li {
+    transition: all .3s ease;
 }
 
 .completed {

@@ -16,6 +16,7 @@ class Task:
         self.created_at = db_data['created_at']
         self.updated_at = db_data['updated_at']
         self.category_id = db_data['category_id']
+        self.user_id = db_data['user_id']
         self.category = None
 
 
@@ -39,6 +40,25 @@ class Task:
     def all_tasks(cls):
         query = "SELECT * FROM tasks JOIN categories ON categories.id=tasks.category_id"
         results = connectToMySQL(cls.DB).query_db(query)
+        all_tasks = []
+        for task in results:
+            each_task = cls(task)
+            each_category = category.Category({
+                'id' : task['id'],
+                'name' : task['categories.name'],
+                'color' : task['color'],
+                'created_at' : task['categories.created_at'],
+                'updated_at' : task['categories.updated_at'],
+                'user_id' : task['categories.user_id']
+            })
+            each_task.category = each_category
+            all_tasks.append(each_task)
+        return all_tasks
+    
+    @classmethod 
+    def all_tasks_with_user(cls, user_id):
+        query = "SELECT * FROM tasks JOIN categories ON categories.id=tasks.category_id WHERE tasks.user_id = %(id)s"
+        results = connectToMySQL(cls.DB).query_db(query, user_id)
         all_tasks = []
         for task in results:
             each_task = cls(task)

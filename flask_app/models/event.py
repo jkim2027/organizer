@@ -44,6 +44,25 @@ class Event:
             all_events.append(each_event)
         return all_events
     
+    @classmethod 
+    def all_events_with_user(cls, user_id):
+        query = "SELECT * FROM events JOIN categories ON categories.id=events.category_id WHERE events.user_id = %(id)s"
+        results = connectToMySQL(cls.DB).query_db(query, user_id)
+        all_events = []
+        for event in results:
+            each_event = cls(event)
+            each_category = category.Category({
+                'id' : event['id'],
+                'name' : event['categories.name'],
+                'color' : event['color'],
+                'created_at' : event['categories.created_at'],
+                'updated_at' : event['categories.updated_at'],
+                'user_id' : event['categories.user_id']
+            })
+            each_event.category = each_category
+            all_events.append(each_event)
+        return all_events
+    
     @classmethod
     def delete_event(cls, event_id):
         data = {'id': event_id}

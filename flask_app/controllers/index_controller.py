@@ -22,9 +22,12 @@ def dashboard():
     else:
         data = {'id': session['user_id']}
         one_user = user.User.get_by_id(data)
-        all_categories = category.Category.all_categories()
-        all_events = event.Event.all_events()
-        all_tasks = task.Task.all_tasks()
+        # all_categories = category.Category.all_categories()
+        all_categories = category.Category.all_categories_with_user(data)
+        # all_events = event.Event.all_events()
+        all_events = event.Event.all_events_with_user(data)
+        # all_tasks = task.Task.all_tasks()
+        all_tasks = task.Task.all_tasks_with_user(data)
         date = datetime.datetime.now()
     return render_template("dashboard.html", all_categories=all_categories, all_events=all_events, date = date, all_tasks=all_tasks, user=one_user)
 
