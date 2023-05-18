@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="/dashboard">Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="/new-task">Create Task</a></li>
+        <li class="sidebar-nav-item"><a href="/new-event">Create Event</a></li>
+        <li class="sidebar-nav-item"><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container mt-3">
+    <h3 class="text-center mb-3" style="color:#0D2248;">Calendar View for <span style="color:#17a2b8;">{{ month_name }}</span></h3>
+    <div class="calendar">
+        <div class="day-header">Monday</div>
+        <div class="day-header">Tuesday</div>
+        <div class="day-header">Wednesday</div>
+        <div class="day-header">Thursday</div>
+        <div class="day-header">Friday</div>
+        <div class="day-header">Saturday</div>
+        <div class="day-header">Sunday</div>
+
+        {% for week in cal %}
+            {% for day in week %}
+                {% if day != 0 %}
+                    <div class="day-cell">
+                        <p class="day">{{ day }}</p>
+                        {% for event in events %}
+                            {% if event.date.day == day %}
+                            <div class="event">
+                                <a href="view/event/{{ event.id }}" style="color:{{ event.color }}">{{ event.label }}</a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for task in tasks %}
+                            {% if task.date.day == day %}
+                            <div class="event">
+                                <a href="view/task/{{ task.id }}" style="color:{{ task.color }}">{{ task.label }}</a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="day-cell"></div>
+                {% endif %}
+            {% endfor %} 
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

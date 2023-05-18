@@ -1,0 +1,356 @@
+h1 {
+    font-family: 'Lilita One', cursive;
+    font-size: 120px;
+    color: white;
+}
+
+h3 {
+    font-family: 'Itim', cursive;
+    font-size: 40px;
+    color: white;
+}
+
+body {
+    font-family: 'Itim', cursive;
+}
+
+.btn-xl {
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+.callout {
+    padding: 17rem 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("images/bg-callout.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.masthead {
+    padding: 17rem 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("images/bg-masthead.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.masthead-register {
+    padding: 12rem 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("images/bg-masthead.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-wrap {
+    width: 400px;
+}
+
+#login-form {
+    border-radius: 40px;
+    height: 50px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#login-form:hover {
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.house {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    line-height: 50px;
+    z-index: 999;
+}
+
+.menu-toggle {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(52, 58, 64, 0.5);
+    line-height: 50px;
+    z-index: 999;
+}
+
+.menu-toggle:focus,
+.menu-toggle:hover {
+    color: #fff;
+}
+
+.menu-toggle:hover {
+    background: #343a40;
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    margin: -17px;
+    z-index: 2;
+    right: 0;
+    width: 250px;
+    height: 110%;
+    transition: all 0.4s ease 0s;
+    transform: translateX(250px);
+    background: #1D809F;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li.sidebar-nav-item a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 15px;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+    font-size: 1.2rem;
+    background: rgba(52, 58, 64, 0.1);
+    height: 80px;
+    line-height: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+}
+
+.create-wrap {
+    border: #0D2248 solid 2px;
+    padding: 30px;
+    margin-top: 30px;
+    width: 80%;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+#select_category {
+    font-family: 'Itim', cursive;
+}
+
+ul {
+    list-style: none;
+}
+
+#todo-select {
+    border: #343a40 solid 2px;
+    border-radius: 60px;
+    padding-top: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 20px;
+}
+
+
+#todo-select li {
+    flex: 1;
+    margin-top: 5px;
+}
+
+#todo-select p {
+    margin-bottom: 5px;
+}
+
+#todo-select a:hover {
+    color: #ECB807;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.fa-check, .fa-pencil, .fa-trash {
+    color: white;
+    
+}
+
+#event-list, #task-list {
+    color: #0D2248;
+}
+
+a {
+    text-decoration: none;
+}
+
+input[type="radio"] {
+    margin: 0 5px 0 20px;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+#check-btn, #edit-btn, #trash-btn {
+    border: none;
+    padding: .8em;
+    font-size: 24px;
+    border-radius: 0px;
+}
+#check-btn {
+    background: #ECB807;
+}
+
+#edit-btn {
+    background: #18A2B8;
+}
+
+#trash-btn {
+    background: rgb(229, 70, 90);
+}
+
+#check-btn:hover, #edit-btn:hover, #trash-btn:hover {
+    opacity: 0.7;
+    transition: .3s;
+}
+
+.slide {
+    transform: translateX(10rem);
+    transition: all 1s ease;
+    opacity: 0;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+#todo-select p {
+    margin-left: 10px;
+}
+
+
+h5 {
+    margin-bottom: 0px;
+}
+
+#reoccurring_freq {
+    display: none;
+}
+
+
+/* calendar */
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+}
+.day-header {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 0.45rem;
+    font-weight: 500;
+}
+.day-cell {
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0.5rem;
+    min-height: 120px;
+}
+/* .event {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} */
+
+.event {
+    margin-bottom: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+}
+.event:before {
+    content: "\25CF";
+    color: #0d6efd;
+    padding-right: 4px;
+}
+.event:hover {
+    background-color: #dee2e6;
+}
+
+.day {
+    margin: 0 auto;
+    padding: 3px;
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    color: #6c757d;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+.day:hover {
+    /* color: black; */
+    background-color: #eee;
+}
+
+.event a:hover {
+    text-decoration: none;
+}

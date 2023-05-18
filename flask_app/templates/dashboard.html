@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="/dashboard">Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="/calendar">View Calendar</a></li>
+        <li class="sidebar-nav-item"><a href="/new-task">Create Task</a></li>
+        <li class="sidebar-nav-item"><a href="/new-event">Create Event</a></li>
+        <li class="sidebar-nav-item"><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Hello, {{ user.first_name }}!</h2>
+        <h4>Today is {{ date.strftime("%A, %m/%d") }}</h4>
+    </div>
+    <div class="container mt-3 d-flex justify-content-around align-items-center" id="filter">
+        <div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" id="search">
+                <button class="btn btn-outline-success" type="submit"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <div class="btn-group" role="group" id="btns-filter">
+            <button type="button" class="btn btn-outline-primary" id="today">Today</button>
+            <button type="button" class="btn btn-outline-primary" id="week">This Week</button>
+            <button type="button" class="btn btn-outline-primary" id="month">This Month</button>
+        </div>
+        <div class="select d-flex align-items-center">
+            <select name="category" id="category_dashboard" class="p-2 px-3 mx-3" onchange="showCategoryInput(this.value)">
+                <option value="none">Categories</option>
+                {% for category in all_categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+                <option value="other">Other</option>
+            </select>
+            <form action="/new-category" method="post" id="create_category" style="display: none">
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control" name="name">
+                    <input type="color" name="color">
+                    <input type="submit" class="btn btn-primary justify-content-end" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <ul id="todo-list">
+            {% for event in all_events %}
+                <li data-date="{{ event.date }}" data-category-id="{{ event.category_id }}">
+                    <div class="d-flex align-items-center justify-content-between" id="todo-select" style="background-color:{{event.category.color}}">
+                        <div class="d-flex-col align-items-center">
+                            <h5><a href="/view/event/{{ event.id }}" id="event-list">{{ event.name }}</a></h5>
+                            <p><em>Details:</em> {{ event.location }} | {{ event.date.strftime('%m/%d') }} | {{ event.getFormattedTime() }}</p>
+                        </div>
+                        <div class="d-flex">
+                            <a href="#" class="btn btn-primary" id="check-btn"><i class="fa-solid fa-check"></i></a>
+                            <a href="/edit/event/{{ event.id }}" class="btn btn-primary" id="edit-btn"><i class="fa-solid fa-pencil"></i></a>
+                            <a href="/delete/event/{{ event.id }}" class="btn btn-primary" id="trash-btn"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                        
+                    </div>
+                </li>
+            {% endfor %}
+            {% for task in all_tasks %}
+                <li data-date="{{ task.deadline }}" data-category-id="{{ task.category_id }}">
+                    <div class="d-flex align-items-center justify-content-between" id="todo-select"
+                        style="background-color:{{task.category.color}}">
+                        <div class="d-flex-col">
+                            <h5><a href="/view/task/{{ task.id }}" id="task-list">{{ task.name }}</a></h5>
+                        <p><em>Details:</em> Deadline - {{ task.deadline.strftime('%m/%d') }}</p>
+                        </div>
+                        <div class="d-flex">
+                            <a href="#" class="btn btn-primary" id="check-btn"><i class="fa-solid fa-check"></i></a>
+                            <a href="/edit/task/{{ task.id }}" class="btn btn-primary" id="edit-btn"><i class="fa-solid fa-pencil"></i></a>
+                            <a href="/delete/task/{{ task.id }}" class="btn btn-primary" id="trash-btn"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

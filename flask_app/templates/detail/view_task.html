@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="/dashboard">Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="/calendar">View Calendar</a></li>
+        <li class="sidebar-nav-item"><a href="/new-task">Create Task</a></li>
+        <li class="sidebar-nav-item"><a href="/new-event">Create Event</a></li>
+        <li class="sidebar-nav-item"><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2 class="mt-3">{{ one_task.name }}</h2>
+    <div class="container d-flex justify-content-center">
+        <div class="create-wrap">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th scope="row" style="width:12%">Deadline:</th>
+                        <td>{{ one_task.deadline.strftime('%m/%d') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="width:12%">Reoccurring?</th>
+                        {% if one_task.reoccurring==1 %}
+                        <td>Yes</td>
+                        {% else %}
+                        <td>No</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th scope="row" style="width:12%">How often?</th>
+                        <td>{{ one_task.reoccurring_freq }} {{ one_task.reoccurring_type }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="width:12%">Notes:</th>
+                        <td>{{ one_task.notes|safe }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container d-flex align-items-center justify-content-between mt-3">
+                <div class="d-flex align-items-center justify-content-start">
+                    <a href="/edit/task/{{ one_task.id }}" class="btn btn-primary">Edit</a>
+                    <a href="/delete/task/{{ one_task.id }}" class="btn btn-primary mx-3" style="background-color: #dc3545; border-color: #dc3545;">Delete</a>
+                </div>
+                <div>
+                    <a href="/dashboard" class="btn btn-primary">Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

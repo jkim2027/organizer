@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block head %}
+<script src="https://cdn.tiny.cloud/1/6mwfg6hzrhs2jt773hpbud6sglt8k2tflfotzzaqykxi1vw8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea#editor',
+        skin: 'bootstrap',
+        plugins: 'image',
+        toolbar: 'bold italic bullist numlist backcolor | link image media',
+        menubar: false,
+        height: "200",
+        setup: (editor) => {
+            editor.on("init", () => {
+                editor.getContainer().style.transition = "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out";
+            });
+            editor.on("focus", () => {
+                (editor.getContainer().style.boxShadow = "0 0 0 .2rem rgba(0, 123, 255, .25)"),
+                (editor.getContainer().style.borderColor = "#80bdff");
+            });
+            editor.on("blur", () => {
+                (editor.getContainer().style.boxShadow = ""),
+                    (editor.getContainer().style.borderColor = "");
+            });
+        },
+    });
+</script>
+
+{% endblock %}
+{% block content %}
+<a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="/dashboard">Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="/calendar">View Calendar</a></li>
+        <li class="sidebar-nav-item"><a href="/new-task">Create Task</a></li>
+        <li class="sidebar-nav-item"><a href="/new-event">Create Event</a></li>
+        <li class="sidebar-nav-item"><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2 class="mt-3">What do you need to do?</h2>
+    <div class="container d-flex justify-content-center">
+        <div class="create-wrap">
+            {% with messages = get_flashed_messages(category_filter=['task']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-info">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form action="/edit/task/{{ one_task.id }}" method="post">
+                <div class="create-input">
+                    <label for="task_name" class="form-label">Task:</label>
+                    <input type="text" class="form-control" name="name" value="{{ one_task.name }}">
+                </div>
+                <div class="create-input">
+                    <label for="category" class="form-label mt-3">Category:</label>
+                    <select class="form-control" name="category_id" id="select_category">
+                        <option value = 'none'>Select a category</option>
+                        {% for category in all_categories %}
+                            {% if category.id == one_task.category_id %}
+                                <option value="{{ category.id }}" selected>{{ category.name }}</option>
+                                {% else %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="create_input" id="new_category"></div>
+                <div class="create-input">
+                    <label for="deadline" class="form-label mt-3">Deadline:</label>
+                    <input type="date" class="form-control" name="deadline" value="{{ one_task.deadline.strftime('%Y-%m-%d')}}">
+                </div>
+                <div class="create-input d-flex align-items-center">
+                    <label for="reoccurring" class="form-label mt-3">Reoccurring?</label>
+                    <div class="form-check form-check-inline">
+                        {% if one_task.reoccurring == 1 %}
+                            <input type="radio" class="" name="reoccurring" value="1" onchange="showReoccurringInput()" checked> Yes </input>
+                            <input type="radio" class="" name="reoccurring" value="0" onchange="hideReoccurringInput()"> No </input>
+                        {% else %}
+                            <input type="radio" class="" name="reoccurring" value="1" onchange="showReoccurringInput()"> Yes </input>
+                            <input type="radio" class="" name="reoccurring" value="0" onchange="hideReoccurringInput()" checked> No </input>
+                        {% endif %}
+                </div>
+                </div>
+                <div id="reoccurring_freq">
+                    <label for="reoccurring_freq" class="form-label mt-3">How often?</label>
+                    <div class="freq_type">
+                        <input type="number" class="form-control" name="reoccurring_freq" value="{{ one_task.reoccurring_freq }}">
+                        <select class="form-control" name="reoccurring_type" id="select_category">
+                            <option value = 'days'>days</option>
+                            <option value = 'weeks'>weeks</option>
+                            <option value = 'months'>months</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="create-input">
+                    <label for="notes" class="form-label mt-3">Notes:</label>
+                    <textarea name="notes" id="editor">{{ one_task.notes }}</textarea>
+                </div>
+                <div class="container d-flex align-items-center justify-content-between">
+                    <input type="submit" class="btn btn-primary mt-3 justify-content-end" value="Update">
+                    <a href="/dashboard" class="btn btn-primary mt-3">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
+    integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+    crossorigin="anonymous"></script>
+
+
+{% endblock %}
