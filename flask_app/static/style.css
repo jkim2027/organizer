@@ -235,6 +235,7 @@ input[type="radio"] {
     font-size: 24px;
     border-radius: 0px;
 }
+
 #check-btn {
     background: #ECB807;
 }
@@ -249,16 +250,16 @@ input[type="radio"] {
 
 #check-btn:hover, #edit-btn:hover, #trash-btn:hover {
     opacity: 0.7;
-    transition: .3s;
+    transition: .5s;
 }
 
 .slide {
-    transform: translateX(10rem);
+    transform: translateX(20rem);
     opacity: 0;
 }
 
 #todo-list li {
-    transition: all .3s ease;
+    transition: all .49s ease;
 }
 
 .completed {
@@ -270,7 +271,9 @@ input[type="radio"] {
     margin-left: 10px;
 }
 
-
+i {
+    pointer-events: none;
+}
 h5 {
     margin-bottom: 0px;
 }

@@ -17,9 +17,9 @@
                 <div class="login-wrap">
                     <h3 class="text-center">Register</h3>
                     <form action="/register" method="post">
-                        <input type="first_name" class="form-control mb-3" name="first_name" placeholder="First Name" id="login-form">
-                        <input type="last_name" class="form-control mb-3" name="last_name" placeholder="Last Name" id="login-form">
-                        <input type="email" class="form-control mb-3" name="email" placeholder="Email" id="login-form">
+                        <input type="first_name" class="form-control mb-3" name="first_name" placeholder="First Name" id="login-form" value="{{form_data.first_name}}">
+                        <input type="last_name" class="form-control mb-3" name="last_name" placeholder="Last Name" id="login-form" value="{{form_data.last_name}}">
+                        <input type="email" class="form-control mb-3" name="email" placeholder="Email" id="login-form" value="{{form_data.email}}">
                         <input type="password" class="form-control mb-3" name="password" placeholder="Password" id="login-form">
                         <input type="password" class="form-control mb-3" name="conf_password" placeholder="Confirm Password" id="login-form">
                         <input type="submit" class="btn btn-primary mt-3 px-3 justify-content-end" value="Submit">

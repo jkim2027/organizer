@@ -51,7 +51,7 @@
             <form action="/new-task" method="post">
                 <div class="create-input">
                     <label for="task_name" class="form-label">Task:</label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="name" value="{{ form_data.name }}">
                 </div>
                 <div class="create-input">
                     <label for="category" class="form-label mt-3">Category:</label>
@@ -66,7 +66,7 @@
                 <div class="create_input" id="new_category"></div>
                 <div class="create-input">
                     <label for="deadline" class="form-label mt-3">Deadline:</label>
-                    <input type="date" class="form-control" name="deadline">
+                    <input type="date" class="form-control" name="deadline" value="{{ form_data.deadline }}">
                 </div>
                 <div class="create-input">
                     <label for="reoccurring" class="form-label mt-3">Reoccurring?</label>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="create-input">
                     <label for="notes" class="form-label mt-3">Notes:</label>
-                    <textarea name="notes" id="editor"></textarea>
+                    <textarea name="notes" id="editor">{{ form_data.notes }}</textarea>
                 </div>
                 <div class="container d-flex align-items-center justify-content-between mt-3">
                     <div class="align-items-center justify-content-start">

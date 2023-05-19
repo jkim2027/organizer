@@ -7,11 +7,13 @@ def new_event():
     # all_categories = category.Category.all_categories()
     data = {'id': session['user_id']}
     all_categories = category.Category.all_categories_with_user(data)
-    return render_template("create/create_event.html", all_categories=all_categories)
+    form_data = session.pop("form_data", None)
+    return render_template("create/create_event.html", all_categories=all_categories, form_data=form_data)
 
 @app.route("/new-event", methods = ['POST'])
 def create_event():
     if not event.Event.validate_event(request.form):
+        session["form_data"] = request.form
         return redirect("/new-event")
     
     selected_category = request.form['category_id']
@@ -21,8 +23,8 @@ def create_event():
             'color': request.form['color'],
             'user_id': session['user_id']
         }
-    new_category = category.Category.new_category(category_data)
-    selected_category = new_category
+        new_category = category.Category.new_category(category_data)
+        selected_category = new_category
     data = {
         'name': request.form['name'],
         'date': request.form['date'],

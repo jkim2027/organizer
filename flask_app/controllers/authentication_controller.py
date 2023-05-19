@@ -7,6 +7,7 @@ from flask_app.models import user
 @app.route("/register", methods = ['POST'])
 def register_user():
     if not user.User.validate_user(request.form):
+        session["form_data"] = request.form
         return redirect("/register")
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     print(pw_hash)

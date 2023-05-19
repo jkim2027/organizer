@@ -7,11 +7,13 @@ def new_task():
     # all_categories = category.Category.all_categories()
     data = {'id': session['user_id']}
     all_categories = category.Category.all_categories_with_user(data)
-    return render_template("create/create_task.html", all_categories=all_categories)
+    form_data = session.pop("form_data", None)
+    return render_template("create/create_task.html", all_categories=all_categories, form_data=form_data)
 
 @app.route("/new-task", methods = ['POST'])
 def create_task():
     if not task.Task.validate_task(request.form):
+        session["form_data"] = request.form
         return redirect("/new-task")
     selected_category = request.form['category_id']
     if selected_category == 'other':

@@ -52,7 +52,7 @@
             <form action="/new-event" method="post">
                 <div class="create-input">
                     <label for="event_name" class="form-label">Event:</label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="name" value="{{ form_data.name }}">
                 </div>
                 <div class="create-input">
                     <label for="category" class="form-label mt-3">Category:</label>
@@ -67,19 +67,19 @@
                 <div class="create_input" id="new_category"></div>
                 <div class="create-input">
                     <label for="date" class="form-label mt-3">Date:</label>
-                    <input type="date" class="form-control" name="date">
+                    <input type="date" class="form-control" name="date" value="{{ form_data.date }}">
                 </div>
                 <div class="create-input">
                     <label for="time" class="form-label mt-3">Time:</label>
-                    <input type="time" class="form-control" name="time">
+                    <input type="time" class="form-control" name="time" value="{{ form_data.time }}">
                 </div>
                 <div class="create-input">
                     <label for="location" class="form-label mt-3">Location:</label>
-                    <input type="text" class="form-control" name="location">
+                    <input type="text" class="form-control" name="location" value="{{ form_data.location }}">
                 </div>
                 <div class="create-input">
                     <label for="notes" class="form-label mt-3">Notes:</label>
-                    <textarea name="notes" id="editor"></textarea>
+                    <textarea name="notes" id="editor">{{ form_data.notes }}</textarea>
                 </div>
                 <div class="container d-flex align-items-center justify-content-between mt-3">
                     <div class="align-items-center justify-content-start">

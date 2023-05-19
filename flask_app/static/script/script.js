@@ -74,12 +74,19 @@ function hideReoccurringInput() {
 
 //trash animation
 const trashButtons = document.querySelectorAll('#todo-list a#trash-btn')
+console.log(trashButtons)
 
 trashButtons.forEach(button => {
     button.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
         const li = e.target.closest('li');
         li.classList.add('slide')
         setTimeout(() => li.remove(), 500)
+        console.log("target", e.target)
+        console.log(e.target.getAttribute("href"))
+        fetch(e.target.getAttribute("href"))
+        return false;
     })
 })
 
