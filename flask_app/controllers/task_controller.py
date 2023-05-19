@@ -4,7 +4,8 @@ from flask_app.models import task, category
 
 @app.route("/new-task")
 def new_task():
-    # all_categories = category.Category.all_categories()
+    if 'user_id' not in session:
+        return redirect("/")
     data = {'id': session['user_id']}
     all_categories = category.Category.all_categories_with_user(data)
     form_data = session.pop("form_data", None)
@@ -40,11 +41,15 @@ def create_task():
 
 @app.route("/delete/task/<int:task_id>")
 def delete_task(task_id):
+    if 'user_id' not in session:
+        return redirect("/")
     task.Task.delete_task(task_id)
     return redirect("/dashboard")
 
 @app.route("/edit/task/<int:task_id>")
 def edit_task(task_id):
+    if 'user_id' not in session:
+        return redirect("/")
     data = {'id': session['user_id']}
     one_task = task.Task.show_one_task(task_id)
     # all_categories = category.Category.all_categories()
@@ -80,5 +85,7 @@ def update_task(task_id):
 
 @app.route("/view/task/<int:task_id>")
 def view_one_task(task_id):
+    if 'user_id' not in session:
+        return redirect("/")
     one_task = task.Task.show_one_task(task_id)
     return render_template("detail/view_task.html", one_task=one_task)

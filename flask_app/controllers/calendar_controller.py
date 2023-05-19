@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, session
+from flask import render_template, session, redirect
 import calendar
 import locale
 from datetime import datetime, timedelta
@@ -8,6 +8,9 @@ from flask_app.models import event, task
 
 @app.route("/calendar")
 def my_calendar():
+    if 'user_id' not in session:
+        return redirect("/")
+    
     current_date = datetime.now()
     year = current_date.year
     month = current_date.month
